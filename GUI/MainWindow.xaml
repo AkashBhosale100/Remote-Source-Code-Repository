@@ -1,0 +1,463 @@
+﻿<!--///////////////////////////////////////////////////////////////////////////////////
+// MainWindow.xaml : This package implements GUI handling functionality            //
+// ver 1.0                                                                            //
+//                                                                                    //
+//Language:      C#                                                                   //
+//Platform    : Lenovo Z50, Win 10, Visual Studio 2017                                //
+//Application : CSE-687 OOD Project 3                                                 //
+//Author      : Akash Bhosale	, aabhosal@syr.edu                                    //
+//Source      : Prof. Jim Fawcett, CSE 687 -Object Oriented Design                    //
+//Environment : C# Console                                                            //
+////////////////////////////////////////////////////////////////////////////////////////-->
+<!--
+ Module Operation
+  ===============
+    Implements XAML for GUI client
+   
+  Maintenance History
+  ====================
+    ver 1.1- 05/01/2018
+    ver 1.0
+    
+     Build Process
+ *======================
+ *devenv Project 1.sln /rebuild debug
+    -->
+
+<Window x:Class="GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI"
+        mc:Ignorable="d"
+        Title="Project #4 Prototype" Height="583.2" Width="577.8" Padding="20" FontFamily="tahoma" Background="#ccc" Loaded="Window_Loaded">
+    <Grid Margin="0,0,3.2,-0.4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="1" Name="tabControl">
+            <TabItem Header="Connect" Margin="-2,-2,-35.8,0.2">
+                <Border Padding="10" Background="#eee">
+                    <StackPanel >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                                <TextBlock Text="IP Address" />
+                                <TextBox x:Name="IPAddrName"  Padding="2" Text="localhost"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Port" />
+                                <TextBox x:Name="PortName" Padding="2" Text="8080"/>
+                            </StackPanel>
+                        </Grid>
+                        <Button x:Name="ConnectButton" Click="ConnectButton_Click" Margin="0 20 350 0" Grid.Column="0" Content="Connect" />
+                        <StackPanel>
+                            <TextBlock Text="Message" Margin="0 50 0 0"/>
+                            <TextBox x:Name="MessageText"  Padding="2" Text=" "/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+            <TabItem x:Name="CheckIn" Width="100" RenderTransformOrigin="1.675,0.558" Background="#FFE5E5E5" IsEnabled="False" Margin="37.8,0,-37.8,0" Height="27" VerticalAlignment="Top" >
+                <TabItem.Header>
+                    <Label Content="Check-in" 
+                           MouseLeftButtonDown="CheckIn_MouseLeftButtonDown" Width="90" RenderTransformOrigin="1.675,0.558"
+                          ></Label>
+                </TabItem.Header>
+
+                <Border Padding="10" Background="#FFEEEEEE" Margin="0,0,-0.4,-2.8">
+                    <Grid Margin="0.4,0.4,0.4,-0.2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="36*"/>
+                            <ColumnDefinition Width="235*"/>
+                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="234*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="6.8,0,9.6,-0.6" Grid.ColumnSpan="4" Grid.Column="1" Grid.RowSpan="2"/>
+                        <TextBlock x:Name="Namespace" Text="Namespace" Margin="5.8,12,188.4,440.4" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2"/>
+                        <TextBox x:Name="NamespaceText" Margin="52.8,3,10.2,444.4" Grid.ColumnSpan="2" Grid.Column="2" Grid.RowSpan="2" />
+                        <TextBlock x:Name="Description" Text="Description" Margin="4.8,42,189.4,411.4" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2"></TextBlock>
+                        <TextBlock x:Name="Dirs" Text="Dirs" Margin="2.8,182,198.4,272.6" RenderTransformOrigin="-4.696,4.063" Grid.Column="2" Grid.RowSpan="2"></TextBlock>
+                        <TextBlock x:Name="Files" Text="Files" Margin="141.8,179,62.4,273.6" RenderTransformOrigin="-4.696,4.063" Grid.Column="2" Grid.RowSpan="2"/>
+                        <TextBox x:Name="DescriptionText"  Margin="53.8,38,10.2,411.4" Grid.ColumnSpan="2" Grid.Column="2" Grid.RowSpan="2" ></TextBox>
+                        <Button x:Name="ConfirmSelectionBtn" Content="Confirm Selection" Margin="4.8,413,158.4,35.6" Click="ConfirmSelectionBtn_Click" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2"/>
+                        <Button x:Name="PerformNewCheckIn" Content="New check-in" Click="PerformNewCheckIn_Click" Margin="4.8,445,140.6,2.6" Grid.Column="1" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="4"   />
+                        <Button x:Name="CheckInBtn" Content="Check-In" Margin="5.6,411,140.6,37.6" Click="CheckInBtn_Click" Grid.ColumnSpan="2" Grid.Column="3" Grid.RowSpan="2"/>
+                        <Button x:Name="AddDepBtn" Content="Add Depedency" Margin="97.8,413,9.4,37.6" Click="AddDep_Click" RenderTransformOrigin="2.345,0.812" Grid.Column="2" Grid.RowSpan="2"/>
+                        <TextBlock x:Name="Category" Text="Category List" Margin="9.8,3,124.6,452.4" RenderTransformOrigin="0.506,0.151" Grid.Column="4" Grid.RowSpan="2"></TextBlock>
+                        <TextBlock x:Name="CheckIn_Status" Text="Check-In Status" Margin="36.6,154,140.6,298.4" Grid.Column="3" RenderTransformOrigin="-0.209,7.965" Grid.ColumnSpan="2" Grid.RowSpan="2"></TextBlock>
+                        <TextBox x:Name="CategoryBox" Margin="115.8,77,10.6,366.4" Grid.Column="4" Grid.RowSpan="2" ></TextBox>
+                        <Button x:Name="AddCategory" Content="Add New Category" Margin="114.8,36,9.6,416.4" RenderTransformOrigin="0.007,0.494" Click="AddCategory_Click" Grid.Column="4" Grid.RowSpan="2"/>
+                        <TextBox x:Name="UserMessages" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Margin="9.6,257,124.6,97.4" Grid.Column="3" TextWrapping="Wrap" RenderTransformOrigin="0.519,0.988" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                        <TextBlock Margin="9.6,223,130.6,220.4" Grid.Column="3" Grid.ColumnSpan="2" Text="Messages" Grid.RowSpan="2"/>
+                        <TextBlock Margin="4.8,77,189.4,0" Height="22" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2">File Name</TextBlock>
+                        <TextBlock Margin="4.8,116,210.4,332.4" RenderTransformOrigin="0.504,0.774" Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="2">File Path</TextBlock>
+                        <TextBox x:Name="FilePath" IsReadOnly="True" Margin="53.8,105,10.2,339.6" Grid.ColumnSpan="2" Grid.Column="2" Grid.RowSpan="2"></TextBox>
+                        <TextBox x:Name="FileNameBox" Margin="53.8,71,10.2,378.4" RenderTransformOrigin="0.734,-8.357" Grid.ColumnSpan="2" IsReadOnly="True" Grid.Column="2" Grid.RowSpan="2"></TextBox>
+                        <Button x:Name="ShowDatabase" Margin="114.8,411,9.6,37.6" Grid.RowSpan="2" Grid.Column="4" Click="ShowDatabase_Click">Show Database</Button>
+                        <ComboBox  x:Name="CheckInStatus" SelectionChanged="CheckInStatus_SelectionChanged"     Margin="36.6,178,19.6,271.4" SelectedIndex="0" RenderTransformOrigin="0.764,0.788" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                            <ComboBoxItem Name="Open" Height="26" Margin="0,0,0.4,0" >Open</ComboBoxItem>
+                            <ComboBoxItem Name="Close" Height="26" Margin="0,0,0.4,0">Close</ComboBoxItem>
+                        </ComboBox>
+
+                        <ListBox x:Name="CategoryListBox" Margin="6.8,33,124.6,336.4" RenderTransformOrigin="0.5,0.5" Grid.Column="4" ItemsSource="{Binding CatList}" Grid.RowSpan="2">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox x:Name="CatCheckBox" Unchecked="CatCheckBox_Unchecked" Checked="CatCheckBox_Checked " IsChecked="{Binding IsSelected}" Content="{Binding TheText}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Grid Margin="0,209,139.4,69.6" Grid.ColumnSpan="3" Grid.RowSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="182*"/>
+                                <ColumnDefinition Width="53*"/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox x:Name="CLientDirsList" Margin="0,3,0,10" RenderTransformOrigin="0.5,0.5" MouseDoubleClick="CLientDirsList_MouseDoubleClick" HorizontalAlignment="Left" Width="125" Grid.ColumnSpan="2">
+                                <ListBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform AngleX="0.198"/>
+                                        <RotateTransform/>
+                                        <TranslateTransform X="0.397"/>
+                                    </TransformGroup>
+                                </ListBox.RenderTransform>
+                            </ListBox>
+                        </Grid>
+                        <Grid Margin="101.8,209,2.4,81.6" Grid.Column="2" Grid.RowSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="95*"/>
+                                <ColumnDefinition Width="43*"/>
+                                <ColumnDefinition Width="141*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5*"/>
+                                <RowDefinition Height="89*"/>
+                                <RowDefinition Height="31*"/>
+                            </Grid.RowDefinitions>
+                            <ListBox x:Name="ClientFilesList" ItemsSource="{Binding TheList}"  SelectionMode="Multiple"      Grid.ColumnSpan="3" Margin="0.2,0,10.2,-0.2" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.RowSpan="3">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox x:Name="ClientFilesSelectedBox" Unchecked="ClientFilesSelectedBox_Unchecked" Checked="ClientFilesSelectedBox_Checked" IsChecked="{Binding IsSelected}" Content="{Binding TheText}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </TabItem>
+            <TabItem x:Name="CheckOut"  IsEnabled="False" Margin="40.8,0,-32.6,-2" HorizontalAlignment="Left" Width="99" >
+                <TabItem.Header>
+                    <Label Content="Check-Out"  MouseLeftButtonDown="CheckOut_MouseLeftButtonDown"  Width="86"></Label>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="63*"/>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="23*"/>
+                        <ColumnDefinition Width="97*"/>
+                        <ColumnDefinition Width="322*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <!-- dirs -->
+                        <RowDefinition Height="5"></RowDefinition>
+                        <!-- gridsplitter-->
+                        <RowDefinition Height="*"></RowDefinition>
+                        <!-- files -->
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Background="#ccc" Grid.ColumnSpan="5" Margin="0,0,-0.2,4.4" Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="11*"/>
+                            <ColumnDefinition Width="46*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <!-- label -->
+                            <RowDefinition Height="30"></RowDefinition>
+                            <!-- textblock -->
+                            <RowDefinition Height="*"></RowDefinition>
+                            <!-- dir list -->
+                            <RowDefinition Height="10"></RowDefinition>
+                            <!-- buttons -->
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,-0.2,0">
+                            <TextBlock DockPanel.Dock="Left" Margin="10 0" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Directory</TextBlock>
+                        </DockPanel>
+                        <DockPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,-0.2,0.4">
+                            <TextBlock x:Name="PathTextBlockCheckOut" DockPanel.Dock="Left" Padding="10 0" Margin="12 0" VerticalAlignment="Center" FontSize="14" FontWeight="Normal" Background="#fff">path</TextBlock>
+                        </DockPanel>
+                        <Border Grid.Row="1" BorderThickness="10" Background="#000" Grid.ColumnSpan="2" Margin="0,30,-0.2,0" Grid.RowSpan="2">
+                            <ListBox x:Name="DirListCheckOut" MouseDoubleClick="DirListCheckOut_MouseDoubleClick" Margin="0.4,0.4,0.2,-7.8"></ListBox>
+                        </Border>
+                    </Grid>
+                    <GridSplitter Grid.Row="1" Grid.ColumnSpan="5" Height="5" HorizontalAlignment="Stretch" Background="#666" Margin="0,0.4,-0.2,253.8" Grid.RowSpan="2"></GridSplitter>
+                    <Grid Grid.Row="1" Background="#ccc" Grid.ColumnSpan="5" Margin="0,4.4,-0.2,-0.2" Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="328*"/>
+                            <ColumnDefinition Width="185*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <!-- label -->
+                            <RowDefinition Height="*"></RowDefinition>
+                            <!-- file list -->
+                            <RowDefinition Height="10"></RowDefinition>
+                            <!-- buttons -->
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Padding="10 0" FontWeight="Bold" FontSize="14" Margin="0,0,313.6,0">Files</TextBlock>
+                        <TextBox x:Name="CheckOutPath" Text="Check Out Path" Grid.ColumnSpan="2" Margin="10,19,4.6,192.8" Grid.RowSpan="2"/>
+                        <TextBlock Margin="16.4,2,6.6,0" Grid.Column="1" >Double Click to check out file</TextBlock>
+                        <Border Grid.Row="1" BorderThickness="10" Background="#000" Grid.ColumnSpan="2" Margin="0,25,-0.4,9.4" Grid.RowSpan="2">
+                            <ListBox x:Name="FileListCheckOut" MouseDoubleClick="FileListCheckOut_MouseDoubleClick" Margin="0.4,-9.6,0,0.6" Height="181" VerticalAlignment="Bottom"></ListBox>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="Browse" IsEnabled="False" Margin="35.6,-2,-66.6,0">
+                <TabItem.Header>
+                    <Label Content="Browse" 
+                        MouseLeftButtonDown="Browse_MouseLeftButtonDown" Width="48" RenderTransformOrigin="1.675,0.558"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="63*"/>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="23*"/>
+                        <ColumnDefinition Width="97*"/>
+                        <ColumnDefinition Width="322*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <!-- dirs -->
+                        <RowDefinition Height="5"></RowDefinition>
+                        <!-- gridsplitter-->
+                        <RowDefinition Height="*"></RowDefinition>
+                        <!-- files -->
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Background="#ccc" Grid.ColumnSpan="5" Margin="0,0,-0.2,4.4" Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="11*"/>
+                            <ColumnDefinition Width="46*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <!-- label -->
+                            <RowDefinition Height="30"></RowDefinition>
+                            <!-- textblock -->
+                            <RowDefinition Height="*"></RowDefinition>
+                            <!-- dir list -->
+                            <RowDefinition Height="10"></RowDefinition>
+                            <!-- buttons -->
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,-0.2,0">
+                            <TextBlock DockPanel.Dock="Left" Margin="10 0" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Directory</TextBlock>
+                        </DockPanel>
+                        <DockPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,-0.2,0.4">
+                            <TextBlock x:Name="PathTextBlock1" DockPanel.Dock="Left" Padding="10 0" Margin="12 0" VerticalAlignment="Center" FontSize="14" FontWeight="Normal" Background="#fff">path</TextBlock>
+                        </DockPanel>
+                        <Border Grid.Row="1" BorderThickness="10" Background="#000" Grid.ColumnSpan="2" Margin="0,30,-0.2,0" Grid.RowSpan="2">
+                            <ListBox x:Name="DirList" MouseDoubleClick="DirList_MouseDoubleClick" Margin="0.4,8.4,0.4,-7.8"></ListBox>
+                        </Border>
+                    </Grid>
+                    <GridSplitter Grid.Row="1" Grid.ColumnSpan="5" Height="5" HorizontalAlignment="Stretch" Background="#666" Margin="0,0.4,-0.2,253.8" Grid.RowSpan="2"></GridSplitter>
+                    <Grid Grid.Row="1" Background="#ccc" Grid.ColumnSpan="5" Margin="0,4.4,-0.2,-0.2" Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="328*"/>
+                            <ColumnDefinition Width="185*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"></RowDefinition>
+                            <!-- label -->
+                            <RowDefinition Height="*"></RowDefinition>
+                            <!-- file list -->
+                            <RowDefinition Height="10"></RowDefinition>
+                            <!-- buttons -->
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Padding="10 0" FontWeight="Bold" FontSize="14" Margin="0,0,227.6,0">Files</TextBlock>
+                        <TextBlock Margin="41.4,2,46.6,0" Grid.Column="1" >Double Click to view</TextBlock>
+                        <Border Grid.Row="1" BorderThickness="10" Background="#000" Grid.ColumnSpan="2" Margin="0,0,0,9.2" Grid.RowSpan="2">
+                            <ListBox x:Name="FileList1" MouseDoubleClick="FileList1_MouseDoubleClick"></ListBox>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="ViewMetadata" Width="100" RenderTransformOrigin="1.675,0.558" Background="#FFE5E5E5" IsEnabled="False" Margin="68.6,0,-68.6,0" Height="27" VerticalAlignment="Top" >
+                <TabItem.Header>
+                    <Label Content="View Metadata" 
+                           MouseLeftButtonDown="ViewMetadata_MouseLeftButtonDown" Width="90" RenderTransformOrigin="1.675,0.558"
+                          ></Label>
+                </TabItem.Header>
+
+                <Border Padding="10" Background="#FFEEEEEE" Margin="0,0,-0.4,-2.8">
+                    <Grid Margin="0.4,0.4,0.4,-0.2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="36*"/>
+                            <ColumnDefinition Width="235*"/>
+                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="234*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="6.8,0,9.6,-0.6" Grid.ColumnSpan="4" Grid.Column="1" Grid.RowSpan="2"/>
+                        <TextBlock x:Name="Package" Text="Package" Margin="119.8,13,63.8,443.6" RenderTransformOrigin="0.5,0.5" Grid.Column="2" Grid.RowSpan="2"/>
+                        <TextBox x:Name="PackageViewMetadata" Margin="119.8,34,10.4,412.6" Grid.ColumnSpan="3" Grid.Column="2" Grid.RowSpan="2"></TextBox>
+                        <TextBlock x:Name="NamespaceView" Text="Namespace" Margin="122.8,67,43.8,390.6" Grid.Column="2" Grid.RowSpan="2"/>
+                        <TextBlock x:Name="Dirs2" Text="Dirs" Margin="8.8,6,191.8,452.6" RenderTransformOrigin="-4.696,4.063" Grid.Column="2" Grid.RowSpan="2"/>
+                        <TextBlock x:Name="Files2" Text="Files" Margin="11.8,226,191.8,226.6" RenderTransformOrigin="-4.696,4.063" Grid.Column="2" Grid.RowSpan="2"/>
+                        <TextBox x:Name="NamespaceBox"  Margin="119.8,87,9.4,361.6" Grid.ColumnSpan="3" Grid.Column="2" Grid.RowSpan="2" ></TextBox>
+                        <TextBlock Margin="129.8,232,41.8,225.6" Grid.RowSpan="2" Grid.Column="2">Version</TextBlock>
+                        <TextBlock Margin="124.8,166,32.8,0" Height="17" VerticalAlignment="Top" Grid.Column="2" Grid.RowSpan="2">Description</TextBlock>
+                        <TextBlock Margin="120.8,117,57.8,340.6" RenderTransformOrigin="0.504,0.774" Grid.Column="2" Grid.RowSpan="2">File Name</TextBlock>
+                        <TextBox x:Name="FileNameView" Margin="122.8,137,12.4,311.6" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="3"/>
+                        <TextBox x:Name="DescriptionBox" Margin="122.8,185,7.4,264.6" RenderTransformOrigin="0.734,-8.357" Grid.ColumnSpan="3" IsReadOnly="True" Grid.Column="2" Grid.RowSpan="2"></TextBox>
+                        <TextBox x:Name="VersionBox" Grid.ColumnSpan="3" Margin="130.8,251,10.4,197.6" Grid.RowSpan="2" Grid.Column="2"></TextBox>
+                        <TextBlock Margin="132.8,284,61.8,172.6" Grid.RowSpan="2" Grid.Column="2"> Status</TextBlock>
+                        <TextBox x:Name="StatusViewBox" Margin="133.8,300,12.4,150.6" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="3"/>
+                        <TextBlock Margin="132.8,327,43.8,127.6" Grid.RowSpan="2" Grid.Column="2">DateTime</TextBlock>
+                        <TextBox x:Name="DateTimeViewBox" Margin="133.8,350,7.4,96.6" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="3"/>
+                        <TextBlock Margin="133.8,381,18.8,75.6" Grid.RowSpan="2" Grid.Column="2">Dependencies</TextBlock>
+                        <TextBox x:Name="DepedencyViewBox" Grid.ColumnSpan="3" Margin="133.8,402,10.4,50.6" Grid.RowSpan="2" Grid.Column="2"></TextBox>
+                        <TextBlock Margin="133.8,427,18.8,25.6" Grid.RowSpan="2" Grid.Column="2">Category</TextBlock>
+                        <TextBox x:Name="CategoryViewBox" Margin="133.8,452,12.4,-0.4" Grid.RowSpan="2" Grid.Column="2" RenderTransformOrigin="0.317,2.743" Grid.ColumnSpan="3"/>
+                        <Grid Margin="0,26,113.8,251.6" Grid.ColumnSpan="3" Grid.RowSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="103*"/>
+                                <ColumnDefinition Width="36*"/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox x:Name="CLientDirsListView" Margin="0,4,0,10" RenderTransformOrigin="0.5,0.5" MouseDoubleClick="CLientDirsListView_MouseDoubleClick" HorizontalAlignment="Left" Width="155" Grid.ColumnSpan="3">
+                                <ListBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform AngleX="0.198"/>
+                                        <RotateTransform/>
+                                        <TranslateTransform X="0.397"/>
+                                    </TransformGroup>
+                                </ListBox.RenderTransform>
+                            </ListBox>
+                        </Grid>
+                        <Grid Margin="0,243,104.8,9.6" Grid.RowSpan="2" Grid.ColumnSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="43*"/>
+                                <ColumnDefinition Width="19*"/>
+                                <ColumnDefinition Width="65*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5*"/>
+                                <RowDefinition Height="89*"/>
+                                <RowDefinition Height="31*"/>
+                            </Grid.RowDefinitions>
+                            <ListBox x:Name="ClientFilesListView" MouseDoubleClick="ClientFilesListView_MouseDoubleClick"  Grid.ColumnSpan="3" Margin="0,4.2,10,8.8" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="148" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </TabItem>
+
+            <TabItem x:Name="QueryTab" RenderTransformOrigin="1.675,0.558" Background="#FFE5E5E5" IsEnabled="False" Margin="68.6,0,-80.8,0" Height="27" VerticalAlignment="Top" >
+                <TabItem.Header>
+                    <Label Content="Query" 
+                           MouseLeftButtonDown="ViewMetadata_MouseLeftButtonDown" Width="61" RenderTransformOrigin="1.675,0.558" Height="27"
+                          ></Label>
+                </TabItem.Header>
+
+                <Border Padding="10" Background="#FFEEEEEE" Margin="0,0,-4.6,-2.8">
+                    <Grid Margin="0.4,0.4,0.4,-0.2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="36*"/>
+                            <ColumnDefinition Width="235*"/>
+                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="234*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="6.8,0,9.6,-0.6" Grid.ColumnSpan="4" Grid.Column="1" Grid.RowSpan="2"/>
+                        <StackPanel Margin="9.8,26,138.2,296.6" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <TextBlock Margin="4.8,7,198.2,449.6" Grid.RowSpan="2" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-0.075"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>Enter Name</TextBlock>
+                        <TextBox x:Name="NameQueryBox" Text="Enter file Name" Margin="97.8,0,18.4,453.6" Grid.RowSpan="2" RenderTransformOrigin="2.534,0.538" Grid.Column="2" Grid.ColumnSpan="3" />
+                        <TextBox x:Name="DescriptionQueryBox" Text="Enter description" Margin="97.8,26,18.4,427.6" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="3"/>
+                        <TextBox x:Name="FromQueryBox" Text="From" Margin="97.8,55,77.2,398.6" Grid.RowSpan="2" Grid.Column="2"/>
+                        <TextBox x:Name="ToQueryBox" Text="To" Grid.ColumnSpan="2" Margin="25.8,55,172.4,396.6" Grid.RowSpan="2" RenderTransformOrigin="4.405,4.271" Grid.Column="3"></TextBox>
+                        <TextBox x:Name="CategoryQueryBox" Text="Enter categories" Margin="97.8,84,18.4,368.6" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="3"/>
+                        <TextBlock Margin="4.8,59,182.2,397.6" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2">Enter Duration:</TextBlock>
+                        <TextBlock Grid.ColumnSpan="2" Margin="4.8,89,174.2,367.6" Grid.RowSpan="2" Grid.Column="1">Enter categories</TextBlock>
+                        <TextBlock Margin="3.8,117,161.2,339.6" Grid.RowSpan="2" RenderTransformOrigin="1.586,4.538" Grid.Column="1" Grid.ColumnSpan="2">Enter depedency</TextBlock>
+                        <TextBlock Grid.ColumnSpan="2" Margin="4.8,147,174.2,309.6" Grid.RowSpan="2" Grid.Column="1">Enter version</TextBlock>
+                        <TextBox x:Name="DepedencyQueryBox" Text="Enter depedencies" Margin="97.8,114,18.4,339.6" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="3"/>
+                        <TextBox x:Name="VersionQueryBox" Text="Enter version as a numeric value" Margin="97.8,142,211.4,305.6" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="3"/>
+                        <TextBlock Margin="58.8,60,138.2,396.6" Grid.RowSpan="2" Grid.Column="2">From</TextBlock>
+                        <TextBlock Margin="196.8,60,10.2,396.6" Grid.RowSpan="2" RenderTransformOrigin="2.755,1.567" Grid.Column="2">To</TextBlock>
+                        <TextBlock Grid.ColumnSpan="2" Margin="4.8,33,174.2,424.6" Grid.RowSpan="2" RenderTransformOrigin="1.144,1.085" Grid.Column="1">Enter Description</TextBlock>
+                        <TextBlock x:Name="QueryOutput" Text="Query Output" Margin="193.8,226,228.4,231.6" RenderTransformOrigin="-4.696,4.063" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+                        <TextBlock Grid.ColumnSpan="4" Margin="9.8,181,18.4,270.6" Grid.RowSpan="2" Grid.Column="1" Text="*Note:-Enter multiple categories and dependencies separated by a '|'"/>
+                        <Button x:Name="Query" Click="Query_Click" Content="Query" Grid.ColumnSpan="4" Margin="9.8,200,18.4,252.6" Grid.RowSpan="2" RenderTransformOrigin="2.9,2.154" Grid.Column="1"></Button>
+                        <Button x:Name="FilesNoParent" Click="FilesNoParent_Click" Content="Files With No Parent" Margin="68,144,32.4,305.6" Grid.RowSpan="2" Grid.Column="4" />
+                        <Grid Margin="0,26,113.8,251.6" Grid.ColumnSpan="3" Grid.RowSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="103*"/>
+                                <ColumnDefinition Width="36*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                        <Grid Margin="3,262,0.4,-8.4" Grid.RowSpan="2" Grid.ColumnSpan="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="58*"/>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition Width="86*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5*"/>
+                                <RowDefinition Height="89*"/>
+                                <RowDefinition Height="31*"/>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="HeadingBox" Grid.ColumnSpan="5" Margin="0,-11,0.2,159" Grid.RowSpan="2"/>
+                            <TextBox x:Name="QueryOutputBox" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto"     ScrollViewer.VerticalScrollBarVisibility="Auto"  AcceptsReturn="True"     FontSize="9" Grid.ColumnSpan="5" Margin="0,1.2,0.2,0" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" Grid.Row="1"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </TabItem>
+
+
+
+
+        </TabControl>
+
+        <StatusBar Grid.Row="2">
+            <TextBlock x:Name="statusBarText" Text="Not Connected.."/>
+        </StatusBar>
+    </Grid>
+</Window>

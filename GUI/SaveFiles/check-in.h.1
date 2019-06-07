@@ -1,0 +1,122 @@
+#pragma once
+
+/////////////////////////////////////////////////////////////////////////
+//Author: Akash Bhosale	, aabhosal@syr.edu							  //	
+//Source: Prof. Jim Fawcett, CSE 687 -Object Oriented Design     	 //
+//Course:CSE 687 Object Oriented Design								//
+//Application: CSE 687 Project# 2  - Check-in.h					   //
+//Environment : C++ Console										  //	
+////////////////////////////////////////////////////////////////////
+/*
+*Package Operation
+*------------------
+*This packaged implements functionality to perform checking-in of a file
+*
+*Required files:
+*----------------
+*FileSystem.h
+*Payload.h
+*DbCore.h
+*
+*Build Process
+*--------------
+*devenv Project 1.sln /rebuild debug
+*
+*Maintenance History:
+*---------------------
+*ver 1.0 : 6th March 2018
+*Created functions to enable check-in
+*/
+
+
+#include<iostream>
+#include<string>
+#include "../FileSystem-Windows/FileSystemDemo/FileSystem.h"
+#include "../Payload/Payload.h"
+#include "../DbCore/DbCore.h"
+#include "../Version/Version.h"
+
+using namespace::std;
+using namespace::NoSqlDb;
+
+	template<typename P>
+	class CheckIn
+	{
+	public:
+		CheckIn(DbCore<P>& db);
+		bool Copy(const string& namespace_, const string& fileName, const int& version);
+		bool doCheckIn(const string& namespace_, const string& fileName,int& version_);
+		string getPackage(const string fileName);
+		static void identity(std::ostream& out = std::cout);
+	private:
+		DbCore<P>& db_;
+		string repoPath = " ";
+		string saveFilePath = "../ServerPrototype/SaveFiles";
+	};
+
+
+	//-----------------------< function to identify fileName >----------------------------------------
+	template<typename P>
+	inline void CheckIn<P>::identity(std::ostream & out)
+	{
+		out << "\n  \"" << __FILE__ << "\"";
+	}
+
+	//-----------------------< constructor >---------------------------------------------------------
+	template<typename P>
+	CheckIn<P>::CheckIn(DbCore<P>& db) :db_(db)
+	{
+		repoPath = "../Storage";
+		if (!FileSystem::Directory::exists(repoPath))
+		{
+			FileSystem::Directory::create(repoPath);
+		}
+	}
+
+	//-------------------------< function to copy file from one location to other location >-------------
+	template<typename P>
+	bool CheckIn<P>::Copy(const string& namespace_,const string& fileName, const int& version)
+	{
+		string fileName_ = fileName + "." + to_string(version);
+		string source = saveFilePath + '/' + fileName;
+		string package = getPackage(fileName);
+		string packageFolder = repoPath + '/' + package;
+		string namespaceFolder = packageFolder + '/' + namespace_;
+		string destPath = namespaceFolder+"/"+fileName_;
+		if(!FileSystem::Directory::exists(packageFolder))
+		FileSystem::Directory::create(packageFolder);
+		if (!FileSystem::Directory::exists(namespaceFolder))
+			FileSystem::Directory::create(namespaceFolder);
+
+		bool result = FileSystem::File::copy(source, destPath);
+		if (result)
+		{
+			cout << " \n File copied to: \n" + FileSystem::Path::getFullFileSpec(destPath) << endl;
+			return true;
+		}
+		return false;
+	}
+
+	//------------------------------< function to provide check-in functionality >-----------------------------
+	template<typename P>
+	bool CheckIn<P>::doCheckIn(const string& namespace_, const string& fileName,int& version_)
+	{
+		Version<PayLoad> v1(db_);
+		string file = namespace_ + "::" + fileName;
+		version_ = v1.getVersion(namespace_,file);
+		bool result = Copy(namespace_, fileName, version_);
+		if (result)
+			return true;
+				return false;
+	}
+
+	//----------< function to get package >---------------------------------------------------------------
+
+	template<typename P>
+	string CheckIn<P>:: getPackage(const string fileName)
+	{
+		int pos = fileName.find_first_of(".");
+		string package = fileName.substr(0, pos);
+		return  package;
+
+	}

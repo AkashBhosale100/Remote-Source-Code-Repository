@@ -1,0 +1,6 @@
+F:\M.S. Syracuse University Study Folder\CSE 687\Projects\Projects\Project #3\Project3\GUI\obj\Release\GUI.csprojResolveAssemblyReference.cache
+F:\M.S. Syracuse University Study Folder\CSE 687\Projects\Projects\Project #3\Project3\GUI\obj\Release\MainWindow.g.cs
+F:\M.S. Syracuse University Study Folder\CSE 687\Projects\Projects\Project #3\Project3\GUI\obj\Release\ViewWindow.g.cs
+F:\M.S. Syracuse University Study Folder\CSE 687\Projects\Projects\Project #3\Project3\GUI\obj\Release\App.g.cs
+F:\M.S. Syracuse University Study Folder\CSE 687\Projects\Projects\Project #3\Project3\GUI\obj\Release\GUI_MarkupCompile.cache
+F:\M.S. Syracuse University Study Folder\CSE 687\Projects\Projects\Project #3\Project3\GUI\obj\Release\GUI_MarkupCompile.lref
